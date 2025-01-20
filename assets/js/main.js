@@ -1,47 +1,159 @@
 /* =====================================================
    Resume section tabs and tab contents
 ===================================================== */
-const resumeTab = document.querySelector(".resume-tabs");
-const resumePortfolioTabBtns = resumeTab.querySelectorAll(".tab-btn");
-const resumeTabContents = document.querySelectorAll(".resume-tab-content");
+// const resumeTab = document.querySelector(".resume-tabs");
+// const resumePortfolioTabBtns = resumeTab.querySelectorAll(".tab-btn");
+// const resumeTabContents = document.querySelectorAll(".resume-tab-content");
 
-var resumeTabNav = function (resumeTabClick) {
-   resumeTabContents.forEach((resumeTabContent) => {
-      resumeTabContent.style.display = "none";
-      resumeTabContent.classList.remove("active");
-   });
+// var resumeTabNav = function (resumeTabClick) {
+//    resumeTabContents.forEach((resumeTabContent) => {
+//       resumeTabContent.style.display = "none";
+//       resumeTabContent.classList.remove("active");
+//    });
 
-   resumePortfolioTabBtns.forEach((resumePortfolioTabBtn) => {
-      resumePortfolioTabBtn.classList.remove("active");
-   });
+//    resumePortfolioTabBtns.forEach((resumePortfolioTabBtn) => {
+//       resumePortfolioTabBtn.classList.remove("active");
+//    });
 
-   resumeTabContents[resumeTabClick].style.display = "flex";
-   resumeTabContents[resumeTabClick].classList.add("active");
-   resumePortfolioTabBtns[resumeTabClick].classList.add("active");
-};
+//    resumeTabContents[resumeTabClick].style.display = "flex";
 
-resumePortfolioTabBtns.forEach((resumePortfolioTabBtn, i) => {
-   resumePortfolioTabBtn.addEventListener("click", () => {
-      resumeTabNav(i);
-   });
-});
+//    setTimeout(() => {
+//       resumeTabContents[resumeTabClick].classList.add("active");
+//    }, 100);
 
+//    resumePortfolioTabBtns[resumeTabClick].classList.add("active");
+// };
+
+// resumePortfolioTabBtns.forEach((resumePortfolioTabBtn, i) => {
+//    resumePortfolioTabBtn.addEventListener("click", () => {
+//       resumeTabNav(i);
+//    });
+// });
 
 /* =====================================================
    Service modal open/close function
 ===================================================== */
+const serviceCardWithModals = document.querySelectorAll(".service-container .card-with-modal");
+
+serviceCardWithModals.forEach((serviceCardWithModal) => {
+   const serviceCard = serviceCardWithModal.querySelector(".service-card");
+   const serviceBackDrop = serviceCardWithModal.querySelector(".service-modal-backdrop");
+   const serviceModal = serviceCardWithModal.querySelector(".service-modal");
+   const modalCloseBtn = serviceCardWithModal.querySelector(".modal-close-btn");
+
+   serviceCard.addEventListener("click", () => {
+      serviceBackDrop.style.display = "flex";
+
+      setTimeout(() => {
+         serviceBackDrop.classList.add("active");
+      }, 100);
+
+      setTimeout(() => {
+         serviceModal.classList.add("active");
+      }, 300);
+   });
+
+   modalCloseBtn.addEventListener("click", () => {
+      setTimeout(() => {
+         serviceBackDrop.style.display = "none";
+      }, 500);
+
+      setTimeout(() => {
+         serviceBackDrop.classList.remove("active");
+         serviceModal.classList.remove("active");
+      }, 100);
+
+   });
+});
 
 /* =====================================================
    Portfolio modals, tabs and cards
 ===================================================== */
 
 // Filter portfolio cards according to portfolio tabs.
+document.addEventListener("DOMContentLoaded", () => {
+   const portfilioTabs = document.querySelector(".porfolio-tabs");
+   const porfolioTabBtns = portfilioTabs.querySelectorAll(".tab-btn");
+   const cardsWithModals = document.querySelectorAll(".portfolio-container .card-with-modal");
+
+   porfolioTabBtns.forEach((tabBtn) => {
+      tabBtn.addEventListener("click", () => {
+         const filter = tabBtn.getAttribute("data-filter");
+
+         cardsWithModals.forEach((cardWithModal) => {
+            if (filter === "all" || cardWithModal.classList.contains(filter)) {
+               cardWithModal.classList.remove("hidden");
+
+               setTimeout(() => {
+                  cardWithModal.style.opacity = "1";
+                  cardWithModal.style.transition = ".5s ease";
+               }, 1);
+            }
+            else {
+               cardWithModal.classList.add("hidden");
+
+               setTimeout(() => {
+                  cardWithModal.style.opacity = "0";
+                  cardWithModal.style.transition = ".5s ease";
+               }, 1);
+            }
+         });
+         // Add active class to the clicked tab button.
+         porfolioTabBtns.forEach((tabBtn) => tabBtn.classList.remove("active"));
+         tabBtn.classList.add("active");
+      });
+   });
+});
 
 // Open/Close Portfolio modals.
+const porfolioCardsWithModals = document.querySelectorAll(".portfolio-container .card-with-modal");
+
+porfolioCardsWithModals.forEach((porfolioCardWithModal) => {
+   const porfolioCard = porfolioCardWithModal.querySelector(".portfolio-card");
+   const porfolioBackdrop = porfolioCardWithModal.querySelector(".porfolio-modal-backdrop");
+   const porfolioModal = porfolioCardWithModal.querySelector(".portfolio-modal");
+   const modalCloseBtn = porfolioCardWithModal.querySelector(".modal-close-btn");
+
+   porfolioCard.addEventListener("click", () => {
+      porfolioBackdrop.style.display = "flex";
+
+      setTimeout(() => {
+         porfolioBackdrop.classList.add("active");
+      }, 300);
+
+      setTimeout(() => {
+         porfolioModal.classList.add("active");
+      }, 300);
+   });
+
+   modalCloseBtn.addEventListener("click", () => {
+      setTimeout(() => {
+         porfolioBackdrop.style.display = "none";
+      }, 500);
+
+      setTimeout(() => {
+         porfolioBackdrop.classList.remove("active");
+         porfolioModal.classList.remove("active");
+      }, 100);
+   });
+});
 
 /* =====================================================
    Testimonial Swiper
 ===================================================== */
+var swiper = new Swiper(".sue-client-swiper", {
+   slidesPerView: 1,
+   spaceBetween: 30,
+   loop: true,
+   pagination: {
+      el: ".swiper-pagination",
+      clickable: true,
+   },
+   navigation: {
+      nextEl: ".swiper-button-next",
+      prevEl: ".swiper-button-prev",
+   },
+});
 
 /* =====================================================
    Send/Receive emails from contact form - EmailJS
