@@ -158,20 +158,96 @@ var swiper = new Swiper(".sue-client-swiper", {
 /* =====================================================
    Send/Receive emails from contact form - EmailJS
 ===================================================== */
+(function () {
+   emailjs.init("evlMkikWBW8CL4XdS");
+})();
+
+const sueContactForm = document.getElementById("sue-contact-form");
+const sueContactFormAlert = document.querySelector(".contact-form-alert");
+
+sueContactForm.addEventListener('submit', function (event) {
+   event.preventDefault();
+   emailjs.sendForm('service_zs98yar', 'template_7pa0mbg', '#sue-contact-form')
+      .then(() => {
+         sueContactFormAlert.innerHTML = "<span>Your message sent successfully!</span> <i class='ri-checkbox-circle-fill'></i>";
+         sueContactForm.reset();
+
+         setTimeout(() => {
+            sueContactFormAlert.innerHTML = "";
+         }, 5000);
+      }, (error) => {
+         sueContactFormAlert.innerHTML = "<span>Message not sent 😕</span> <i class='ri-error-warning-fill'></i>";
+         sueContactFormAlert.title = error;
+      });
+});
 
 /* =====================================================
    Shrink the height of the header on scroll
 ===================================================== */
+window.addEventListener("scroll", () => {
+   const sueHeader = document.querySelector(".sue-header");
+
+   sueHeader.classList.toggle("shrink", window.scrollY > 0);
+});
 
 /* =====================================================
    Bottom navigation menu
 ===================================================== */
 
 // Each bottom navigation menu items active on page scroll.
+window.addEventListener("scroll", () => {
+   const navMenuSections = document.querySelectorAll(".nav-menu-section");
+   const scrollY = window.pageYOffset;
+
+   navMenuSections.forEach((navMenuSection) => {
+      let sectionHeight = navMenuSection.offsetHeight;
+      let sectionTop = navMenuSection.offsetTop - 50;
+      let id = navMenuSection.getAttribute("id");
+
+      if (scrollY > sectionTop && scrollY <= sectionTop + sectionHeight) {
+         document.querySelector(".bottom-nav .menu li a[href*=" + id + "]").classList.add("current");
+      } else {
+         document.querySelector(".bottom-nav .menu li a[href*=" + id + "]").classList.remove("current");
+      }
+   });
+});
 
 // Javascript to show bottom navigation menu on home(page load).
+window.addEventListener("DOMContentLoaded", () => {
+   const bottomNav = document.querySelector(".bottom-nav");
+
+   bottomNav.classList.toggle("active", window.scrollY < 10);
+});
 
 // Javascript to show/hide bottom navigation menu on home(scroll).
+const bottomNav = document.querySelector(".bottom-nav");
+const menuHideBtn = document.querySelector(".menu-hide-btn");
+const menuShowBtn = document.querySelector(".menu-show-btn");
+var navTimeout;
+
+window.addEventListener("scroll", () => {
+   bottomNav.classList.add("active");
+
+   if (window.scrollY < 10) {
+      function scrollStoped() {
+         bottomNav.classList.add("active");
+      }
+
+      clearTimeout(navTimeout);
+      navTimeout = setTimeout(scrollStoped, 2000);
+   }
+
+   if (window.scrollY > 10) {
+      menuHideBtn.classList.add("active");
+
+      function scrollStoped() {
+         bottomNav.classList.remove("active");
+      }
+
+      clearTimeout(navTimeout);
+      navTimeout = setTimeout(scrollStoped, 2000);
+   }
+});
 
 // Hide bottom navigation menu on click menu-hide-btn.
 
