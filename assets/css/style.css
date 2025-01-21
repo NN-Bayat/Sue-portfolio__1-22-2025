@@ -185,6 +185,19 @@ body {
 ========================================= */
 
 /* ========== Page scroll bar ========== */
+::-webkit-scrollbar {
+   width: 10px;
+   background: var(--scrollbar-color);
+}
+
+::-webkit-scrollbar-thumb {
+   background: var(--scrollbar-thumb);
+   border-radius: 25px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+   background: var(--scrollbar-thumb-hover);
+}
 
 /* ========== Customized cursor ========== */
 
@@ -233,7 +246,6 @@ body {
 /* =========================================
    Header
 ========================================= */
-
 .sue-header {
    z-index: var(--z-fixed);
    position: fixed;
@@ -242,6 +254,11 @@ body {
    left: 0;
    padding: 30px 0;
    transition: .3s ease;
+}
+
+.sue-header.shrink {
+   background: var(--body-color);
+   padding: 12px 0;
 }
 
 .sue-header .inner {
@@ -323,7 +340,18 @@ body {
    position: fixed;
    left: 50%;
    transform: translateX(-50%);
+   /* bottom: 50px; */
+   bottom: -75px;
+   opacity: 0;
+   transition: .5s ease, .3s ease;
+   transition-property: bottom, opacity;
+}
+
+.bottom-nav.active {
    bottom: 50px;
+   opacity: 1;
+   transition: .5s ease, .3s ease;
+   transition-property: bottom, opacity;
 }
 
 .bottom-nav-inner {
@@ -414,6 +442,11 @@ body {
    transition: .3s ease;
    pointer-events: none;
    opacity: 0;
+}
+
+.menu-hide-btn.active {
+   pointer-events: all;
+   opacity: 1;
 }
 
 .bottom-nav .menu-hide-btn:hover {
@@ -1323,6 +1356,9 @@ body {
    margin-top: 25px;
 }
 
+/* =========================================
+   Testimonials
+========================================= */
 .testimonials {
    position: relative;
    width: 100%;
@@ -1400,16 +1436,240 @@ body {
 }
 
 /* =========================================
-   Testimonials
-========================================= */
-
-/* =========================================
    Contact Me
 ========================================= */
+.contact-container {
+   position: relative;
+   display: flex;
+   justify-content: center;
+   align-items: center;
+   column-gap: 60px;
+}
+
+.contact-info h3 {
+   color: var(--color-02);
+   font-size: var(--base-font-size);
+   font-weight: var(--medium-font-size);
+   text-transform: uppercase;
+   margin-bottom: 40px;
+}
+
+.contact-details {
+   display: flex;
+   flex-direction: column;
+   row-gap: 40px;
+   margin-bottom: 50px;
+}
+
+.contact-item {
+   display: flex;
+   align-items: center;
+   column-gap: 25px;
+}
+
+.contact-icon {
+   color: var(--primary-color);
+   font-size: 2rem;
+   background: var(--card-bg);
+   width: 75px;
+   height: 75px;
+   display: flex;
+   justify-content: center;
+   align-items: center;
+   border-radius: 10px;
+}
+
+.contact-method {
+   display: flex;
+   flex-direction: column;
+   row-gap: 7px;
+}
+
+.contact-method span {
+   font-size: var(--tiny-font-size);
+   text-transform: uppercase;
+}
+
+.contact-method h4 {
+   color: var(--color-02);
+   font-size: var(--base-font-size);
+   font-weight: var(--medium-font-size);
+}
+
+.contact-method a {
+   color: var(--primary-color);
+   transition: .3s;
+}
+
+.contact-method a:hover {
+   color: var(--hover-color);
+}
+
+.contact-method a span {
+   font-size: var(--small-font-size);
+   text-transform: none;
+}
+
+.contact-method a i {
+   font-size: var(--medium-font-size);
+}
+
+.content-social-links {
+   width: 100%;
+   display: flex;
+   column-gap: 25px;
+}
+
+.content-social-links li {
+   font-size: 1.75rem;
+   background: var(--card-bg);
+   width: 80px;
+   height: 80px;
+   display: flex;
+   justify-content: center;
+   align-items: center;
+   border-radius: 50%;
+   cursor: pointer;
+}
+
+.content-social-links li a {
+   color: var(--primary-color);
+   transition: .3s;
+}
+
+.content-social-links li:hover a {
+   color: var(--hover-color);
+}
+
+.contact-form-body {
+   position: relative;
+   background: var(--card-bg);
+   width: 100%;
+   padding: 50px;
+   border-radius: 35px;
+}
+
+.contact-form-body h2 {
+   color: var(--color-02);
+   font-size: var(--h2-font-size);
+   font-weight: var(--font-bold);
+   text-transform: uppercase;
+   margin-bottom: 30px;
+}
+
+.contact-form-body h2 span {
+   color: var(--primary-color)
+}
+
+.contact-form-body p {
+   font-size: var(--tiny-font-size);
+   margin-bottom: 45px;
+}
+
+.contact-form-body form {
+   display: flex;
+   flex-direction: column;
+   row-gap: 15px;
+}
+
+.contact-form-body form .input-group input,
+.contact-form-body form .input-group textarea {
+   color: var(--color-02);
+   font-size: var(--small-font-size);
+   background: hsl(var(--hue) 54% 74% / .1);
+   width: 100%;
+   border: none;
+   outline: none;
+   padding: 17px 20px;
+   border-radius: 10px;
+}
+
+.contact-form-body form .input-group textarea {
+   height: 150px;
+   resize: none;
+}
+
+.contact-form-body form .send-message {
+   display: flex;
+   justify-content: space-between;
+   align-items: center;
+   margin-top: 10px;
+}
+
+.contact-form-body form .input-group button {
+   font-size: var(--small-font-size);
+   font-weight: var(--font-medium);
+   width: 200px;
+   padding: 16px 30px;
+   transition: .3s;
+}
+
+.contact-form-alert {
+   cursor: pointer;
+}
+
+.contact-form-alert span {
+   color: var(--color-02);
+   font-size: var(--tiny-font-size);
+   font-weight: var(--font-regular);
+}
+
+.contact-form-alert i {
+   color: var(--primary-color);
+   font-size: 1.25rem;
+}
 
 /* =========================================
    Footer
 ========================================= */
+.sue-footer {
+   background: var(--footer-bg);
+   padding-top: 100px;
+   padding-bottom: 165px;
+}
+
+.sue-footer .sue-container .inner {
+   display: flex;
+   justify-content: center;
+   align-items: center;
+   flex-direction: column;
+   row-gap: 40px;
+}
+
+.footer-menu {
+   display: flex;
+   justify-content: center;
+   align-items: center;
+   flex-wrap: wrap;
+   column-gap: 22px;
+   row-gap: 22px;
+}
+
+.footer-menu .menu-item a {
+   color: var(--color-01);
+   font-size: calc(var(--tiny-font-size) - .07rem);
+   font-weight: var(--font-medium);
+   text-transform: uppercase;
+   padding: 5px 12px;
+   border-radius: 15px;
+   transition: .3s;
+}
+
+.footer-menu .menu-item a:hover {
+   color: var(--color-03);
+   background: var(--color-01);
+}
+
+.sue-footer .copy-right {
+   color: var(--color-04);
+   font-size: var(--small-font-size);
+   margin-top: 10px;
+}
+
+.sue-footer .copy-right a:hover {
+   color: var(--color-01);
+   transition: .3s;
+}
 
 /* =========================================
    Media Queries (max-width: 1600px)
