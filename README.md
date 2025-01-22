@@ -1,6 +1,8 @@
-# portfolio-sue
+# Description
 
-**:** A sleek, fully responsive platform that combines creativity and functionality with interactive modals and a smooth user experience. Designed with seamless transitions and a modern aesthetic, it adapts beautifully across all devices. The user interface is intuitive, making navigation effortless and engaging. Each section is carefully crafted to showcase the work in a visually appealing way. Whether on mobile or desktop, the experience remains dynamic and immersive.
+**Sue Ayers-:** A sleek, fully responsive platform that combines creativity and functionality with interactive modals and a smooth user experience. Designed with seamless transitions and a modern aesthetic, it adapts beautifully across all devices. The user interface is intuitive, making navigation effortless and engaging. Each section is carefully crafted to showcase the work in a visually appealing way. Whether on mobile or desktop, the experience remains dynamic and immersive.
+
+#  Photoes
 
 <p align="center">
   <img src="![screencapture-127-0-0-1-5500-2025-01-22-04_16_25](https://github.com/user-attachments/assets/aadfd971-2e1e-4236-9cb9-0c35b637de7c) " width="200" style="display:inline-block;" />
