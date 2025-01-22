@@ -358,7 +358,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
 /* ============ ScrollReveal JS animations ============ */
 ScrollReveal({
-   reset: true,
+   // reset: true,
    distance: '100px',
    duration: 2500,
    delay: 400
